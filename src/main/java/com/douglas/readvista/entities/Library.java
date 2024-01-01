@@ -1,25 +1,42 @@
 package com.douglas.readvista.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Library {
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
+@Entity
+public class Library implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nameLibrary;
+
+	@Embedded
 	private Address address;
 
+	@OneToMany(mappedBy = "library")
 	private List<Book> list = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "loan")
+	private List<Loan> loans;
 
 	public Library() {
 	}
 
-	public Library(Integer id, String nameLibrary, List<Book> list, Address address) {
+	public Library(Integer id, String nameLibrary, Address address) {
 		super();
 		this.id = id;
 		this.nameLibrary = nameLibrary;
-		this.list = list;
 		this.address = address;
 	}
 
