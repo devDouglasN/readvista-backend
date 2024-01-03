@@ -3,6 +3,8 @@ package com.douglas.readvista.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +21,7 @@ public class Customer implements Serializable{
 	private Integer id;
 	private String name;
 	
+	@CPF
 	@Column(unique = true)
 	private String cpf;
 	

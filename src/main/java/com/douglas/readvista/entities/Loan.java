@@ -33,20 +33,14 @@ public class Loan implements Serializable{
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 	
-	@ManyToOne
-	@JoinColumn(name = "library_id")
-	private Library library;
-	
 	public Loan() {
 	}
 	
-	public Loan(Integer id, Book book, Customer customer, Date loanDate, Date returnDate) {
+	public Loan(Integer id, Book book, Customer customer) {
 		super();
 		this.id = id;
 		this.book = book;
 		this.customer = customer;
-		this.loanDate = loanDate;
-		this.returnDate = returnDate;
 	}
 
 	public Integer getId() {
