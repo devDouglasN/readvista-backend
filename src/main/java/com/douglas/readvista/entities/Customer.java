@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ public class Customer implements Serializable{
 	private String email;
 	private String password;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "customer")
 	private List<Loan> loans;
 

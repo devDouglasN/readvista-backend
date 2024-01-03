@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.douglas.readvista.enums.Status;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -30,6 +31,7 @@ public class Book implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "book")
 	private List<Loan> loans = new ArrayList<>();
 
