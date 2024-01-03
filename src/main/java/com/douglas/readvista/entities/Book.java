@@ -8,6 +8,8 @@ import java.util.Objects;
 import com.douglas.readvista.enums.Status;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,6 +27,7 @@ public class Book implements Serializable{
 	private String author;
 	private String yearOfPublication;
 	
+	@Enumerated(EnumType.STRING)
 	private Status status;
 	
 	@OneToMany(mappedBy = "book")
