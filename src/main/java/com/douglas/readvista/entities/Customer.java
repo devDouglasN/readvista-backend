@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.douglas.readvista.dtos.CustomerDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -45,6 +46,15 @@ public class Customer implements Serializable{
 		this.cpf = cpf;
 		this.email = email;
 		this.password = password;
+	}
+	
+	public Customer(CustomerDTO objDTO) {
+		super();
+		this.id = objDTO.getId();
+		this.name = objDTO.getName();
+		this.cpf = objDTO.getCpf();
+		this.email = objDTO.getEmail();
+		this.password = objDTO.getPassword();
 	}
 
 	public Integer getId() {

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.douglas.readvista.dtos.CustomerDTO;
 import com.douglas.readvista.entities.Customer;
 import com.douglas.readvista.repositories.CustomerRepository;
 
@@ -22,5 +23,11 @@ public class CustomerService {
 
 	public List<Customer> findAll() {
 		return customerRepository.findAll();
+	}
+
+	public Customer create(CustomerDTO objDTO) {
+		objDTO.setId(null);
+		Customer newObj = new Customer(objDTO);
+		return customerRepository.save(newObj);
 	}
 }
