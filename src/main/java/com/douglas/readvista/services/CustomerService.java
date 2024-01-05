@@ -1,5 +1,6 @@
 package com.douglas.readvista.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,13 @@ public class CustomerService {
 
 	@Autowired
 	private CustomerRepository customerRepository;
-	
+
 	public Customer findById(Integer id) {
 		Optional<Customer> obj = customerRepository.findById(id);
 		return obj.orElse(null);
+	}
+
+	public List<Customer> findAll() {
+		return customerRepository.findAll();
 	}
 }
