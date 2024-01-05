@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.douglas.readvista.dtos.CustomerDTO;
 import com.douglas.readvista.entities.Customer;
 import com.douglas.readvista.services.CustomerService;
 
@@ -18,8 +19,8 @@ public class CustomerResource {
 	private CustomerService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Customer> findById(@PathVariable Integer id){	
+	public ResponseEntity<CustomerDTO> findById(@PathVariable Integer id){	
 		Customer obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
+		return ResponseEntity.ok().body(new CustomerDTO(obj));
 	}
 }
