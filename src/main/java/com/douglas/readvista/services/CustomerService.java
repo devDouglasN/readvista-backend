@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.douglas.readvista.dtos.CustomerDTO;
 import com.douglas.readvista.entities.Customer;
 import com.douglas.readvista.repositories.CustomerRepository;
+import com.douglas.readvista.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CustomerService {
@@ -18,7 +19,7 @@ public class CustomerService {
 
 	public Customer findById(Integer id) {
 		Optional<Customer> obj = customerRepository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Id object: " + id + " not found"));
 	}
 
 	public List<Customer> findAll() {
