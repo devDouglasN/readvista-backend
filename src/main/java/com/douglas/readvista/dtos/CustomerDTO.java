@@ -4,13 +4,23 @@ import java.io.Serializable;
 
 import com.douglas.readvista.entities.Customer;
 
+import jakarta.validation.constraints.NotNull;
+
 public class CustomerDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	
+	@NotNull(message = "Field NAME is required")
 	private String name;
+	
+	@NotNull(message = "Field CPF is required")
 	private String cpf;
+	
+	@NotNull(message = "Field EMAIL is required")
 	private String email;
+	
+	@NotNull(message = "Field PASSWORD is required")
 	private String password;
 
 	public CustomerDTO() {
