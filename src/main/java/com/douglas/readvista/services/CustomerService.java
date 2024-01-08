@@ -12,6 +12,8 @@ import com.douglas.readvista.repositories.CustomerRepository;
 import com.douglas.readvista.services.exceptions.DataIntegrityViolationException;
 import com.douglas.readvista.services.exceptions.ObjectNotFoundException;
 
+import jakarta.validation.Valid;
+
 @Service
 public class CustomerService {
 
@@ -33,6 +35,15 @@ public class CustomerService {
 		Customer newObj = new Customer(objDTO);
 		return customerRepository.save(newObj);
 	}
+	
+	public Customer update(Integer id, @Valid CustomerDTO objDTO) {
+		objDTO.setId(id);
+		Customer oldObj = findById(id);
+		validationCpfAndEmail(objDTO);
+		oldObj = new Customer(objDTO);
+		return customerRepository.save(oldObj);
+		
+	}
 
 	public void validationCpfAndEmail(CustomerDTO objDTO) {
 		Optional<Customer> obj = customerRepository.findByCpf(objDTO.getCpf());
@@ -46,4 +57,6 @@ public class CustomerService {
 			throw new DataIntegrityViolationException("Email already registered in the system!");
 		}
 	}
+
+	
 }
