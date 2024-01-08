@@ -46,14 +46,6 @@ public class Book implements Serializable{
 		this.yearOfPublication = yearOfPublication;
 		this.status = status;
 	}
-	
-//	public Library getLibrary() {
-//		return library;
-//	}
-//
-//	public void setLibrary(Library library) {
-//		this.library = library;
-//	}
 
 	public List<Loan> getLoans() {
 		return loans;

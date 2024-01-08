@@ -1,6 +1,7 @@
 package com.douglas.readvista.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.validator.constraints.br.CPF;
@@ -13,6 +14,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -34,17 +37,22 @@ public class Customer implements Serializable{
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "customer")
-	private List<Loan> loans;
+	private List<Loan> loans = new ArrayList<>();
+	
+	@ManyToOne
+	@JoinColumn(name = "library_id")
+	private Library library;
 
 	public Customer() {
 	}
 
-	public Customer(Integer id, String name, String cpf, String email, String password) {
+	public Customer(Integer id, String name, String cpf, String email, Library library, String password) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
 		this.email = email;
+		this.library = library;
 		this.password = password;
 	}
 	
@@ -87,6 +95,14 @@ public class Customer implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public Library getLibrary() {
+		return library;
+	}
+
+	public void setLibrary(Library library) {
+		this.library = library;
 	}
 
 	public String getPassword() {

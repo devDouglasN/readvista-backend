@@ -1,6 +1,8 @@
 package com.douglas.readvista.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Embedded;
@@ -8,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Library implements Serializable{
@@ -20,6 +23,9 @@ public class Library implements Serializable{
 
 	@Embedded
 	private Address address;
+	
+	@OneToMany(mappedBy = "library")
+	private List<Customer> customers = new ArrayList<>();
 
 	public Library() {
 	}
@@ -47,13 +53,9 @@ public class Library implements Serializable{
 		this.nameLibrary = nameLibrary;
 	}
 
-//	public List<Book> getList() {
-//		return list;
-//	}
-//
-//	public void setList(List<Book> list) {
-//		this.list = list;
-//	}
+	public List<Customer> getCustomers() {
+		return customers;
+	}
 
 	public Address getAddress() {
 		return address;
