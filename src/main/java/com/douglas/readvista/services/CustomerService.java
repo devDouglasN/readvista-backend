@@ -41,8 +41,18 @@ public class CustomerService {
 		Customer oldObj = findById(id);
 		validationCpfAndEmail(objDTO);
 		oldObj = new Customer(objDTO);
-		return customerRepository.save(oldObj);
-		
+		return customerRepository.save(oldObj);	
+	}
+	
+	public void delete(Integer id) {
+		Customer obj = findById(id);
+		if (obj == null) {
+	        throw new ObjectNotFoundException("Customer with id " + id + " does not exist!");
+	    }
+		if (obj.getLoans().size() > 0) {
+			throw new DataIntegrityViolationException("The Customer has a loan so it cannot be deleted!");
+		}
+		customerRepository.deleteById(id);
 	}
 
 	public void validationCpfAndEmail(CustomerDTO objDTO) {
@@ -57,6 +67,4 @@ public class CustomerService {
 			throw new DataIntegrityViolationException("Email already registered in the system!");
 		}
 	}
-
-	
 }
