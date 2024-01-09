@@ -1,5 +1,8 @@
 package com.douglas.readvista.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,5 +25,12 @@ public class BookResource {
 	public ResponseEntity<BookDTO> findById(@PathVariable Integer id){
 		Book obj = service.findById(id);
 		return ResponseEntity.ok().body(new BookDTO(obj));
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<BookDTO>> findAll(){
+		List<Book> list = service.findAll();
+		List<BookDTO> listDTO = list.stream().map(BookDTO::new).collect(Collectors.toList());	
+		return ResponseEntity.ok().body(listDTO);
 	}
 }
