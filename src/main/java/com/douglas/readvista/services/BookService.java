@@ -32,5 +32,12 @@ public class BookService {
 		objDTO.setId(null);
 		Book newObj = new Book(objDTO);
 		return bookRepository.save(newObj);
+	}
+
+	public Book update(Integer id, @Valid BookDTO objDTO) {
+		objDTO.setId(id);
+		Book oldObj = findById(id);
+		oldObj = new Book(objDTO);
+		return bookRepository.save(oldObj);
 	}	
 }
