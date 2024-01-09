@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.douglas.readvista.dtos.BookDTO;
 import com.douglas.readvista.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -45,6 +46,15 @@ public class Book implements Serializable{
 		this.author = author;
 		this.yearOfPublication = yearOfPublication;
 		this.status = status;
+	}
+	
+	public Book(BookDTO objDTO) {
+		super();
+		this.id = objDTO.getId();
+		this.title = objDTO.getTitle();
+		this.author = objDTO.getAuthor();
+		this.yearOfPublication = objDTO.getYearOfPublication();
+		this.status = objDTO.getStatus();
 	}
 
 	public List<Loan> getLoans() {
