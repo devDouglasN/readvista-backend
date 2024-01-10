@@ -1,5 +1,8 @@
 package com.douglas.readvista.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,5 +25,12 @@ public class LoanController {
 	public ResponseEntity<LoanDTO> findById(@PathVariable Integer id){
 		Loan obj = service.findById(id);
 		return ResponseEntity.ok().body(new LoanDTO(obj));
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<LoanDTO>> findAll(){
+		List<Loan> list = service.findAll();
+		List<LoanDTO> listDTO = list.stream().map(LoanDTO::new).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
 	}
 }

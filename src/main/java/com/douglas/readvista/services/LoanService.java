@@ -1,5 +1,6 @@
 package com.douglas.readvista.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,9 @@ public class LoanService {
 	public Loan findById(Integer id) {
 		Optional<Loan> obj = loanRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Id object " + id + " not found!" ));
+	}
+
+	public List<Loan> findAll() {
+		return loanRepository.findAll();
 	}	
 }
