@@ -13,6 +13,8 @@ import com.douglas.readvista.entities.Loan;
 import com.douglas.readvista.repositories.LoanRepository;
 import com.douglas.readvista.services.exceptions.ObjectNotFoundException;
 
+import jakarta.validation.Valid;
+
 @Service
 public class LoanService {
 
@@ -38,14 +40,22 @@ public class LoanService {
 		return loanRepository.save(newLoan(objDTO));
 	}
 
+	public Loan update(Integer id, @Valid LoanDTO objDTO) {
+		objDTO.setId(id);
+		Loan oldObj = findById(id);
+		oldObj = newLoan(objDTO);
+		return loanRepository.save(oldObj);
+	}
+
 	private Loan newLoan(LoanDTO objDTO) {
 		Book book = bookService.findById(objDTO.getBook());
 		Customer customer = customerService.findById(objDTO.getCustomer());
-		
+
 		Loan loan = new Loan();
-		if(objDTO.getId() != null) {
+		if (objDTO.getId() != null) {
 			loan.setId(objDTO.getId());
 		}
+		
 		loan.setBook(book);
 		loan.setCustomer(customer);
 		return loan;
