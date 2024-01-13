@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,10 +26,12 @@ public class Loan implements Serializable{
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date returnDate;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "book_id")
 	private Book book;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
@@ -42,7 +45,7 @@ public class Loan implements Serializable{
 		this.book = book;
 		this.customer = customer;
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
