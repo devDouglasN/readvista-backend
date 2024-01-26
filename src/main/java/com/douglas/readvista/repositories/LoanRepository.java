@@ -18,4 +18,12 @@ public interface LoanRepository extends JpaRepository<Loan, Integer> {
 			AND l.customer.id = :idCustomer
 			""")
 	LocalDateTime findLoanDateByBookIdAndCustomerId(Integer idBook, Integer idCustomer);
+
+	@Query("""
+			select count(l)
+			from Loan l
+			where
+			l.customer.id = :id
+			""")
+	int countLoansByCustomerId(Integer id);
 }
