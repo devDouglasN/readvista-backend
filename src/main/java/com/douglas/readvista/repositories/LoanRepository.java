@@ -4,5 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.douglas.readvista.entities.Loan;
 
-public interface LoanRepository extends JpaRepository<Loan, Integer>{
+public interface LoanRepository extends JpaRepository<Loan, Integer> {
+
+	boolean existsByBookIdAndCustomerId(Integer idBook, Integer idCustomer);
 }
