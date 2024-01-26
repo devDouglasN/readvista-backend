@@ -34,6 +34,8 @@ public class Customer implements Serializable{
 	@Column(unique = true)
 	private String email;
 	private String password;
+	
+	private Boolean active;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "customer")
@@ -48,6 +50,7 @@ public class Customer implements Serializable{
 
 	public Customer(Integer id, String name, String cpf, String email, Library library, String password) {
 		super();
+		this.active = true;
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
@@ -57,7 +60,7 @@ public class Customer implements Serializable{
 	}
 	
 	public Customer(CustomerDTO objDTO) {
-		super();
+		this.active = true;
 		this.id = objDTO.getId();
 		this.name = objDTO.getName();
 		this.cpf = objDTO.getCpf();
@@ -111,6 +114,14 @@ public class Customer implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	public List<Loan> getLoans() {

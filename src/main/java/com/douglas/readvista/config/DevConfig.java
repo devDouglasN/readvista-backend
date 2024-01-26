@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.douglas.readvista.servives.LibrarySystem;
+import com.douglas.readvista.services.LibrarySystem;
 
 @Configuration
 @Profile("dev")

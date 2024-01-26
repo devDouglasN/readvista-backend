@@ -17,13 +17,13 @@ public class LoanDTO implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date returnDate;
 
-	@NotNull(message = "Field TECHNICIAN is required")
+	@NotNull(message = "Field BOOK is required")
 	private Integer book;
 	@NotNull(message = "Field CUSTOMER is required")
 	private Integer customer;
 	private String bookName;
 	private String customerName;
-	
+
 	public LoanDTO() {
 	}
 
@@ -61,7 +61,7 @@ public class LoanDTO implements Serializable {
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
 	}
-	
+
 	public Integer getBook() {
 		return book;
 	}
@@ -93,6 +93,5 @@ public class LoanDTO implements Serializable {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-
 
 }

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.douglas.readvista.servives.LibrarySystem;
+import com.douglas.readvista.services.LibrarySystem;
 
 import jakarta.annotation.PostConstruct;
 

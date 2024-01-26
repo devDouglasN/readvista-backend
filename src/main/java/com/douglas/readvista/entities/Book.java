@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.douglas.readvista.dtos.BookDTO;
+import com.douglas.readvista.enums.BookCondition;
 import com.douglas.readvista.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,6 +30,8 @@ public class Book implements Serializable{
 	private String author;
 	private String yearOfPublication;
 	
+	private Boolean active;
+	
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
@@ -41,6 +44,7 @@ public class Book implements Serializable{
 	
 	public Book(Integer id, String title, String author, String yearOfPublication, Status status) {
 		super();
+		this.active = true;
 		this.id = id;
 		this.title = title;
 		this.author = author;
@@ -49,7 +53,7 @@ public class Book implements Serializable{
 	}
 	
 	public Book(BookDTO objDTO) {
-		super();
+		this.active = true;
 		this.id = objDTO.getId();
 		this.title = objDTO.getTitle();
 		this.author = objDTO.getAuthor();
@@ -96,6 +100,14 @@ public class Book implements Serializable{
 	public void setYearOfPublication(String yearOfPublication) {
 		this.yearOfPublication = yearOfPublication;
 	}
+	
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 
 	public Status getStatus() {
 		return status;
@@ -104,7 +116,7 @@ public class Book implements Serializable{
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
