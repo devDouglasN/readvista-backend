@@ -35,6 +35,9 @@ public class Book implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
+	@Enumerated(EnumType.STRING)
+	private BookCondition condition;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "book")
 	private List<Loan> loans = new ArrayList<>();
@@ -117,6 +120,14 @@ public class Book implements Serializable{
 		this.status = status;
 	}
 	
+	public BookCondition getCondition() {
+		return condition;
+	}
+
+	public void setCondition(BookCondition condition) {
+		this.condition = condition;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
