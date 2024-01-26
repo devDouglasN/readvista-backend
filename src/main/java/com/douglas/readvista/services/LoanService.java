@@ -10,6 +10,9 @@ import com.douglas.readvista.dtos.LoanDTO;
 import com.douglas.readvista.entities.Book;
 import com.douglas.readvista.entities.Customer;
 import com.douglas.readvista.entities.Loan;
+import com.douglas.readvista.loan.validators.BookLoanData;
+import com.douglas.readvista.repositories.BookRepository;
+import com.douglas.readvista.repositories.CustomerRepository;
 import com.douglas.readvista.repositories.LoanRepository;
 import com.douglas.readvista.services.exceptions.ObjectNotFoundException;
 
@@ -23,10 +26,16 @@ public class LoanService {
 
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private BookRepository bookRepository;
 
 	@Autowired
 	private CustomerService customerService;
 
+	@Autowired
+	private CustomerRepository customerRepository;
+	
 	public Loan findById(Integer id) {
 		Optional<Loan> obj = loanRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Id object " + id + " not found!"));
@@ -47,7 +56,7 @@ public class LoanService {
 		return loanRepository.save(oldObj);
 	}
 
-	private Loan newLoan(LoanDTO objDTO) {
+	private Loan newLoan(LoanDTO objDTO) {	
 		Book book = bookService.findById(objDTO.getBook());
 		Customer customer = customerService.findById(objDTO.getCustomer());
 
@@ -59,5 +68,20 @@ public class LoanService {
 		loan.setBook(book);
 		loan.setCustomer(customer);
 		return loan;
+	}
+	
+	public void loan (BookLoanData data) {
+		if(!customerRepository.existsById(data.idCustomer())){
+			throw new ObjectNotFoundException("The provided customer ID was not found!");
+		}
+		if(!bookRepository.existsById(data.idBook())) {
+			throw new ObjectNotFoundException("The provided book ID was not found!");
+		}
+		
+		var customer = customerRepository.findById(data.idCustomer()).get();
+		var book = bookRepository.findById(data.idBook()).get();
+		var loan = new Loan(null, book, customer);
+		loan.setLoanDate(java.sql.Timestamp.valueOf(data.date()));
+		loanRepository.save(loan);
 	}
 }
