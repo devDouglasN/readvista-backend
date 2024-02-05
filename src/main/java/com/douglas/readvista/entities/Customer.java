@@ -41,6 +41,7 @@ public class Customer implements Serializable{
 	@OneToMany(mappedBy = "customer")
 	private List<Loan> loans = new ArrayList<>();
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "library_id")
 	private Library library;
