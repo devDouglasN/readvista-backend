@@ -3,12 +3,13 @@ package com.douglas.readvista.loan.validators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.douglas.readvista.dtos.BookLoanData;
 import com.douglas.readvista.repositories.BookRepository;
 import com.douglas.readvista.repositories.LoanRepository;
 import com.douglas.readvista.services.exceptions.ValidationException;
 
 @Component
-public class LoanBookValidator {
+public class LoanBookValidator implements ValidatorForBookLoans {
 
 	@Autowired
 	private BookRepository bookRepository;
@@ -18,15 +19,15 @@ public class LoanBookValidator {
 	
 	public void validator(BookLoanData data) {
 		
-		var bookEstaAtivo = bookRepository.existsByIdAndActiveTrue(data.idBook());
+		var bookIsActive = bookRepository.existsByIdAndActiveTrue(data.idBook());
 		
-		if(!bookEstaAtivo) {
+		if(!bookIsActive) {
 			throw new ValidationException("The book is not available!");
 		}
 		
-		var livroFoiEmprestado = loanRepository.existsByBookIdAndCustomerId(data.idBook(), data.idCustomer());
+		var bookWasBorrowed = loanRepository.existsByBookId(data.idBook());
 		
-		if(bookEstaAtivo && livroFoiEmprestado) {
+		if(bookIsActive && bookWasBorrowed) {
 			throw new ValidationException("The book is already on loan!");
 		}
 	}

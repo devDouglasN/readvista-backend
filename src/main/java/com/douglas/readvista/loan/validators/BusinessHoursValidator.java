@@ -4,10 +4,11 @@ import java.time.DayOfWeek;
 
 import org.springframework.stereotype.Component;
 
+import com.douglas.readvista.dtos.BookLoanData;
 import com.douglas.readvista.services.exceptions.ValidationException;
 
 @Component
-public class BusinessHoursValidator {
+public class BusinessHoursValidator implements ValidatorForBookLoans {
 
 	public void validator (BookLoanData data) {
 		var date = data.date();
@@ -17,7 +18,7 @@ public class BusinessHoursValidator {
 		var libraryClosure = date.getHour() > 18;	
 		
 		if(sunday || saturday || libraryOpening || libraryClosure) {
-			throw new ValidationException("Biblioteca fora do horário de funcionamento!");
+			throw new ValidationException("Library outside opening hours!");
 		}
 	}
 }
