@@ -3,6 +3,7 @@ package com.douglas.readvista.dtos;
 import java.io.Serializable;
 
 import com.douglas.readvista.entities.Book;
+import com.douglas.readvista.enums.BookCondition;
 import com.douglas.readvista.enums.Status;
 
 import jakarta.persistence.EnumType;
@@ -18,6 +19,9 @@ public class BookDTO implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	private Status status;
+	
+	@Enumerated(EnumType.STRING)
+	private BookCondition condition;
 
 	public BookDTO() {
 	}
@@ -29,6 +33,7 @@ public class BookDTO implements Serializable {
 		this.author = book.getAuthor();
 		this.yearOfPublication = book.getYearOfPublication();
 		this.status = book.getStatus();
+		this.condition = book.getCondition();
 	}
 
 	public Integer getId() {
@@ -69,5 +74,13 @@ public class BookDTO implements Serializable {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public BookCondition getCondition() {
+		return condition;
+	}
+
+	public void setCondition(BookCondition condition) {
+		this.condition = condition;
 	}
 }

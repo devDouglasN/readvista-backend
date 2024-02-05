@@ -11,6 +11,7 @@ import com.douglas.readvista.entities.Book;
 import com.douglas.readvista.entities.Customer;
 import com.douglas.readvista.entities.Library;
 import com.douglas.readvista.entities.Loan;
+import com.douglas.readvista.enums.BookCondition;
 import com.douglas.readvista.enums.Status;
 import com.douglas.readvista.repositories.BookRepository;
 import com.douglas.readvista.repositories.CustomerRepository;
@@ -40,13 +41,22 @@ public class LibrarySystem {
 		
 		Customer customer1 = new Customer(null, "Douglas Nascimento", "337.411.810-05", "douglas@mail.com", library, "888");
 		Customer customer2 = new Customer(null, "Larissa Martins", "234.958.770-37", "lari@mail.com", library, "888");
-		List<Customer> customers = Arrays.asList(customer1, customer2);
+		Customer customer3 = new Customer(null, "Lucas Silva", "564.065.300-04", "lucas@mail.com", library, "888");
+		Customer customer4 = new Customer(null, "Maria Oliveira", "888.151.540-78", "maria@mail.com", library, "888");
+		Customer customer5 = new Customer(null, "Beatriz Pereira", "691.905.580-57", "beatriz@mail.com", library, "888");
+		Customer customer6 = new Customer(null, "Gabriel Almeida", "308.172.190-30", "gabriel@mail.com", library, "888");
+		List<Customer> customers = Arrays.asList(customer1, customer2, customer3, customer4, customer5, customer6);
 		List<Customer> saveCustomers = customerRepository.saveAll(customers);
 	
 		
-		Book book1 = new Book(null, "A Guerra dos Tronos", "George R. R. Martin", "1996", Status.BORROWED);
-		Book book2 = new Book(null, "A fúria dos reis: As Crônicas de Gelo e Fogo", "George R. R. Martin", "1998", Status.OVERDUE);
-		List<Book> books = Arrays.asList(book1, book2);
+		Book book1 = new Book(null, "A Guerra dos Tronos", "George R. R. Martin", "1996", Status.BORROWED, BookCondition.GOOD);
+		Book book2 = new Book(null, "A fúria dos reis: As Crônicas de Gelo e Fogo", "George R. R. Martin", "1998", Status.OVERDUE, BookCondition.GOOD);
+		Book book3 = new Book(null, "O Nome do Vento", "Patrick Rothfuss", "2010", Status.RETURNED, BookCondition.GOOD);
+		Book book4 = new Book(null, "O Caminho dos Reis", "Brandon Sanderson", "1998", Status.RETURNED, BookCondition.GOOD);
+		Book book5 = new Book(null, "As Mentiras de Locke Lamora", "Scott Lynch", "2006", Status.RETURNED, BookCondition.GOOD);
+		Book book6 = new Book(null, "A Lâmina em Si", "Joe Abercrombie", "2006", Status.RETURNED, BookCondition.GOOD);
+		Book book7 = new Book(null, "A Quinta Estação", " N.K. Jemisin", "2015", Status.OVERDUE, BookCondition.DAMAGED);
+		List<Book> books = Arrays.asList(book1, book2, book3, book4, book5, book6, book7);
 		List<Book> saveBooks = bookRepository.saveAll(books);
 		
 		

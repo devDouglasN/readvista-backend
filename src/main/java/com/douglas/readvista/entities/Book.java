@@ -45,7 +45,7 @@ public class Book implements Serializable{
 	public Book() {
 	}
 	
-	public Book(Integer id, String title, String author, String yearOfPublication, Status status) {
+	public Book(Integer id, String title, String author, String yearOfPublication, Status status, BookCondition condition) {
 		super();
 		this.active = true;
 		this.id = id;
@@ -62,6 +62,7 @@ public class Book implements Serializable{
 		this.author = objDTO.getAuthor();
 		this.yearOfPublication = objDTO.getYearOfPublication();
 		this.status = objDTO.getStatus();
+		this.condition = objDTO.getCondition();
 	}
 
 	public List<Loan> getLoans() {
