@@ -13,6 +13,9 @@ public record BookLoanData(
         @NotNull
         Integer idCustomer,
 
+        LocalDateTime date,
+
         @NotNull @Future
-        LocalDateTime date) {
+        LocalDateTime returnDate
+) {
 }
