@@ -7,7 +7,7 @@ import com.douglas.readvista.repositories.LoanRepository;
 import com.douglas.readvista.services.exceptions.ValidationException;
 
 @Component
-public class LoanLimitValidator {
+public class LoanLimitValidator implements ValidatorForBookLoans {
 	
 	private static final int MAX_LOANS_PER_CUSTOMER = 2;
 	

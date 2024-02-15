@@ -1,9 +1,11 @@
 package com.douglas.readvista.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import com.douglas.readvista.loan.validators.BookLoanData;
+import com.douglas.readvista.loan.validators.ValidatorForBookLoans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +37,10 @@ public class LoanService {
 
 	@Autowired
 	private CustomerRepository customerRepository;
-	
+
+	@Autowired
+	private List<ValidatorForBookLoans> validators = new ArrayList<>();
+
 	public Loan findById(Integer id) {
 		Optional<Loan> obj = loanRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Id object " + id + " not found!"));
@@ -77,7 +82,9 @@ public class LoanService {
 		if(!bookRepository.existsById(data.idBook())) {
 			throw new ObjectNotFoundException("The provided book ID was not found!");
 		}
-		
+
+		validators.forEach(v -> v.validator(data));
+
 		var customer = customerRepository.findById(data.idCustomer()).get();
 		var book = bookRepository.findById(data.idBook()).get();
 		var loan = new Loan(null, book, customer);
