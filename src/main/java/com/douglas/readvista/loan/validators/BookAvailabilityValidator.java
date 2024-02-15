@@ -3,7 +3,7 @@ package com.douglas.readvista.loan.validators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.douglas.readvista.dtos.BookLoanData;
+
 import com.douglas.readvista.repositories.BookRepository;
 import com.douglas.readvista.services.exceptions.ValidationException;
 

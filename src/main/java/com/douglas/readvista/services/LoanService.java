@@ -10,7 +10,6 @@ import com.douglas.readvista.dtos.LoanDTO;
 import com.douglas.readvista.entities.Book;
 import com.douglas.readvista.entities.Customer;
 import com.douglas.readvista.entities.Loan;
-import com.douglas.readvista.loan.validators.BookLoanData;
 import com.douglas.readvista.repositories.BookRepository;
 import com.douglas.readvista.repositories.CustomerRepository;
 import com.douglas.readvista.repositories.LoanRepository;
