@@ -30,5 +30,4 @@ public class LoanBookValidator implements ValidatorForBookLoans {
 			throw new ValidationException("The book is already on loan!");
 		}
 	}
-	
 }
