@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/books")
+@SecurityRequirement(name = "bearer-key")
 public class BookResource {
 
 	@Autowired
