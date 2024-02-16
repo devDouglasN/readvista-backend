@@ -6,9 +6,9 @@ import com.douglas.readvista.entities.Book;
 import com.douglas.readvista.services.exceptions.ValidationException;
 
 @Component
-public class BookConditionValidator {
+public class BookConditionValidator implements ValidatorForBookCondition {
 	
-	 public void validate(Book book) {
+	 public void validator(Book book) {
 	        if (book.getCondition() == null) {
 	            throw new ValidationException("Book condition is not specified!");
 	        }

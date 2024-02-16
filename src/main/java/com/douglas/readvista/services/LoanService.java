@@ -1,10 +1,12 @@
 package com.douglas.readvista.services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import com.douglas.readvista.loan.validators.BookLoanData;
+import com.douglas.readvista.loan.validators.ValidatorForBookCondition;
 import com.douglas.readvista.loan.validators.ValidatorForBookLoans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +43,9 @@ public class LoanService {
 	@Autowired
 	private List<ValidatorForBookLoans> validators = new ArrayList<>();
 
+	@Autowired
+	private List<ValidatorForBookCondition> bookConditionValidators = new ArrayList<>();
+
 	public Loan findById(Integer id) {
 		Optional<Loan> obj = loanRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Id object " + id + " not found!"));
@@ -75,7 +80,7 @@ public class LoanService {
 		return loan;
 	}
 	
-	public void loan (BookLoanData data) {
+	public Loan loan (BookLoanData data) {
 		if(!customerRepository.existsById(data.idCustomer())){
 			throw new ObjectNotFoundException("The provided customer ID was not found!");
 		}
@@ -83,12 +88,17 @@ public class LoanService {
 			throw new ObjectNotFoundException("The provided book ID was not found!");
 		}
 
+		var book = bookRepository.findById(data.idBook()).get();
+		System.out.println(book.getTitle());
+
 		validators.forEach(v -> v.validator(data));
+		bookConditionValidators.forEach(v -> v.validator(book));
 
 		var customer = customerRepository.findById(data.idCustomer()).get();
-		var book = bookRepository.findById(data.idBook()).get();
 		var loan = new Loan(null, book, customer);
-		loan.setLoanDate(java.sql.Timestamp.valueOf(data.date()));
-		loanRepository.save(loan);
+		LocalDateTime loanDate = data.date() != null ? data.date() : LocalDateTime.now();
+		loan.setLoanDate(java.sql.Timestamp.valueOf(loanDate));
+		loan.setReturnDate(java.sql.Timestamp.valueOf(data.returnDate()));
+		return loanRepository.save(loan);
 	}
 }
