@@ -1,6 +1,9 @@
 package com.douglas.readvista.controller;
 
+import com.douglas.readvista.entities.UserSS;
 import com.douglas.readvista.entities.user.DataAuthentication;
+import com.douglas.readvista.infra.security.DataTokenJWT;
+import com.douglas.readvista.infra.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
@@ -21,21 +24,15 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationManager manager;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping
     public ResponseEntity login(@RequestBody @Valid DataAuthentication data) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(data.email(), data.password());
         var authentication = this.manager.authenticate(authenticationToken);
+        var tokenJWT = tokenService.generateToken((UserSS) authentication.getPrincipal());
 
-        return ResponseEntity.ok().build();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
-
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
+        return ResponseEntity.ok(new DataTokenJWT(tokenJWT));
     }
 }
