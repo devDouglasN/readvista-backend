@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.douglas.readvista.dtos.LoanDTO;
 import com.douglas.readvista.entities.Loan;
+import com.douglas.readvista.loan.validators.BookLoanData;
 import com.douglas.readvista.services.LoanService;
 
 import jakarta.validation.Valid;
@@ -44,8 +45,8 @@ public class LoanController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Loan> create(@Valid @RequestBody LoanDTO objDTO) {
-		Loan newObj = service.create(objDTO);
+	public ResponseEntity<Loan> create(@Valid @RequestBody BookLoanData bookLoanData) {
+		Loan newObj = service.loan(bookLoanData);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
