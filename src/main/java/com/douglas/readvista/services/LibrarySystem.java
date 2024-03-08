@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.douglas.readvista.entities.Address;
@@ -11,15 +13,17 @@ import com.douglas.readvista.entities.Book;
 import com.douglas.readvista.entities.Customer;
 import com.douglas.readvista.entities.Library;
 import com.douglas.readvista.entities.Loan;
+import com.douglas.readvista.entities.UserSS;
 import com.douglas.readvista.enums.BookCondition;
 import com.douglas.readvista.enums.Status;
 import com.douglas.readvista.repositories.BookRepository;
 import com.douglas.readvista.repositories.CustomerRepository;
 import com.douglas.readvista.repositories.LibraryRepository;
 import com.douglas.readvista.repositories.LoanRepository;
+import com.douglas.readvista.repositories.UserRepository;
 
 @Service
-public class LibrarySystem {
+public class LibrarySystem implements CommandLineRunner {
 
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -33,18 +37,33 @@ public class LibrarySystem {
 	@Autowired
 	private LoanRepository loanRepository;
 	
-	public void startSystem() {
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+    private PasswordEncoder passwordEncoder;
+
+	@Override
+	public void run(String... args) throws Exception {
+		
+		String email = "usuario@test.com";
+		String password = "senha";
+		String passwordEncrypted = passwordEncoder.encode(password);
+		UserSS user = new UserSS(null, email, passwordEncrypted);
+		if (!userRepository.existsByEmail(email)) {
+			userRepository.save(user);
+		}
 		
 		Address address = new Address("Jardim Paulista", "78145-184", "São Paulo", "Prédio 05", "1005");
 		Library library = new Library(null, "Labirinto Literário", address);
 		libraryRepository.save(library);
 		
-		Customer customer1 = new Customer(null, "Douglas Nascimento", "337.411.810-05", "douglas@mail.com", library, "888");
-		Customer customer2 = new Customer(null, "Larissa Martins", "234.958.770-37", "lari@mail.com", library, "888");
-		Customer customer3 = new Customer(null, "Lucas Silva", "564.065.300-04", "lucas@mail.com", library, "888");
-		Customer customer4 = new Customer(null, "Maria Oliveira", "888.151.540-78", "maria@mail.com", library, "888");
-		Customer customer5 = new Customer(null, "Beatriz Pereira", "691.905.580-57", "beatriz@mail.com", library, "888");
-		Customer customer6 = new Customer(null, "Gabriel Almeida", "308.172.190-30", "gabriel@mail.com", library, "888");
+		Customer customer1 = new Customer(null, "Douglas Nascimento", "337.411.810-05", "douglas@mail.com", library, "senha");
+		Customer customer2 = new Customer(null, "Luana Souza", "234.958.770-37", "luana.souza@mail.com", library, "senha");
+		Customer customer3 = new Customer(null, "Lucas Silva", "564.065.300-04", "lucas.silva@mail.com", library, "senha");
+		Customer customer4 = new Customer(null, "Maria Oliveira", "888.151.540-78", "maria.oliveira@mail.com", library, "senha");
+		Customer customer5 = new Customer(null, "Beatriz Pereira", "691.905.580-57", "beatriz.pereira@mail.com", library, "senha");
+		Customer customer6 = new Customer(null, "Gabriel Almeida", "308.172.190-30", "gabriel.almeida@mail.com", library, "senha");
 		List<Customer> customers = Arrays.asList(customer1, customer2, customer3, customer4, customer5, customer6);
 		List<Customer> saveCustomers = customerRepository.saveAll(customers);
 	
@@ -63,7 +82,6 @@ public class LibrarySystem {
 		Loan loan1 = new Loan(null, saveBooks.get(0), saveCustomers.get(0));
 		Loan loan2 = new Loan(null, saveBooks.get(1), saveCustomers.get(1));
 		List<Loan> loans = Arrays.asList(loan1, loan2);
-		loanRepository.saveAll(loans);
-	}
-	
+		loanRepository.saveAll(loans);		
+	}	
 }
