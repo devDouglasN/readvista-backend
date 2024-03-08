@@ -55,10 +55,6 @@ public class LoanService {
 		return loanRepository.findAll();
 	}
 
-	public Loan create(LoanDTO objDTO) {
-		return loanRepository.save(newLoan(objDTO));
-	}
-
 	public Loan update(Integer id, @Valid LoanDTO objDTO) {
 		objDTO.setId(id);
 		Loan oldObj = findById(id);
