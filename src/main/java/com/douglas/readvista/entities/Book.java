@@ -36,7 +36,7 @@ public class Book implements Serializable{
 	private Status status;
 	
 	@Enumerated(EnumType.STRING)
-	private BookCondition condition;
+	private BookCondition bookCondition;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "book")
@@ -45,7 +45,7 @@ public class Book implements Serializable{
 	public Book() {
 	}
 	
-	public Book(Integer id, String title, String author, String yearOfPublication, Status status, BookCondition condition) {
+	public Book(Integer id, String title, String author, String yearOfPublication, Status status, BookCondition bookCondition) {
 		super();
 		this.active = true;
 		this.id = id;
@@ -53,6 +53,7 @@ public class Book implements Serializable{
 		this.author = author;
 		this.yearOfPublication = yearOfPublication;
 		this.status = status;
+		this.bookCondition = bookCondition;
 	}
 	
 	public Book(BookDTO objDTO) {
@@ -62,7 +63,7 @@ public class Book implements Serializable{
 		this.author = objDTO.getAuthor();
 		this.yearOfPublication = objDTO.getYearOfPublication();
 		this.status = objDTO.getStatus();
-		this.condition = objDTO.getCondition();
+		this.bookCondition = objDTO.getCondition();
 	}
 
 	public List<Loan> getLoans() {
@@ -122,11 +123,11 @@ public class Book implements Serializable{
 	}
 	
 	public BookCondition getCondition() {
-		return condition;
+		return bookCondition;
 	}
 
-	public void setCondition(BookCondition condition) {
-		this.condition = condition;
+	public void setCondition(BookCondition bookCondition) {
+		this.bookCondition = bookCondition;
 	}
 
 	@Override

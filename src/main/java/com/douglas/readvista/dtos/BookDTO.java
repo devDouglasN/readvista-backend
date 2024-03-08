@@ -21,7 +21,7 @@ public class BookDTO implements Serializable {
 	private Status status;
 	
 	@Enumerated(EnumType.STRING)
-	private BookCondition condition;
+	private BookCondition bookCondition;
 
 	public BookDTO() {
 	}
@@ -33,7 +33,7 @@ public class BookDTO implements Serializable {
 		this.author = book.getAuthor();
 		this.yearOfPublication = book.getYearOfPublication();
 		this.status = book.getStatus();
-		this.condition = book.getCondition();
+		this.bookCondition = book.getCondition();
 	}
 
 	public Integer getId() {
@@ -77,10 +77,10 @@ public class BookDTO implements Serializable {
 	}
 
 	public BookCondition getCondition() {
-		return condition;
+		return bookCondition;
 	}
 
-	public void setCondition(BookCondition condition) {
-		this.condition = condition;
+	public void setCondition(BookCondition bookCondition) {
+		this.bookCondition = bookCondition;
 	}
 }
