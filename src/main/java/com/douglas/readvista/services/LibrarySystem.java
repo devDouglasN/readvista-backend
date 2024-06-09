@@ -68,13 +68,27 @@ public class LibrarySystem implements CommandLineRunner {
 		List<Customer> saveCustomers = customerRepository.saveAll(customers);
 	
 		
-		Book book1 = new Book(null, "A Guerra dos Tronos", "George R. R. Martin", "1996", Status.BORROWED, BookCondition.GOOD);
-		Book book2 = new Book(null, "A fúria dos reis: As Crônicas de Gelo e Fogo", "George R. R. Martin", "1998", Status.OVERDUE, BookCondition.GOOD);
-		Book book3 = new Book(null, "O Nome do Vento", "Patrick Rothfuss", "2010", Status.RETURNED, BookCondition.GOOD);
-		Book book4 = new Book(null, "O Caminho dos Reis", "Brandon Sanderson", "1998", Status.RETURNED, BookCondition.GOOD);
-		Book book5 = new Book(null, "As Mentiras de Locke Lamora", "Scott Lynch", "2006", Status.RETURNED, BookCondition.GOOD);
-		Book book6 = new Book(null, "A Lâmina em Si", "Joe Abercrombie", "2006", Status.RETURNED, BookCondition.GOOD);
-		Book book7 = new Book(null, "A Quinta Estação", " N.K. Jemisin", "2015", Status.OVERDUE, BookCondition.DAMAGED);
+		Book book1 = new Book(null, "A Guerra dos Tronos", "https://m.media-amazon.com/images/I/91+1SUO3vUL._AC_UF1000,1000_QL80_.jpg", 
+				"George R. R. Martin", "1996", Status.BORROWED, BookCondition.GOOD);
+		
+		Book book2 = new Book(null, "A fúria dos reis: As Crônicas de Gelo e Fogo", "https://m.media-amazon.com/images/I/91PglZzF9kL._AC_UF1000,1000_QL80_.jpg", 
+				"George R. R. Martin", "1998", Status.OVERDUE, BookCondition.GOOD);
+		
+		Book book3 = new Book(null, "O Nome do Vento", "https://m.media-amazon.com/images/I/81CGmkRG9GL._AC_UF1000,1000_QL80_.jpg", 
+				"Patrick Rothfuss", "2010", Status.RETURNED, BookCondition.GOOD);
+		
+		Book book4 = new Book(null, "O Caminho dos Reis", "https://www.editoratrama.com.br/wp-content/uploads/2022/07/capaLivro-152440_original-1-min-scaled.jpg",
+				"Brandon Sanderson", "1998", Status.RETURNED, BookCondition.GOOD);
+		
+		Book book5 = new Book(null, "As Mentiras de Locke Lamora", "https://m.media-amazon.com/images/I/91ZA3Dd3yOL._AC_UF1000,1000_QL80_.jpg",
+				"Scott Lynch", "2006", Status.RETURNED, BookCondition.GOOD);
+		
+		Book book6 = new Book(null, "A Lâmina em Si", "https://m.media-amazon.com/images/I/71Ir4pdJxHL._AC_UF1000,1000_QL80_.jpg",
+				"Joe Abercrombie", "2006", Status.RETURNED, BookCondition.GOOD);
+		
+		Book book7 = new Book(null, "A Quinta Estação", "https://m.media-amazon.com/images/I/81Qnzqi3XlL._AC_UF1000,1000_QL80_.jpg",
+				" N.K. Jemisin", "2015", Status.OVERDUE, BookCondition.DAMAGED);
+		
 		List<Book> books = Arrays.asList(book1, book2, book3, book4, book5, book6, book7);
 		List<Book> saveBooks = bookRepository.saveAll(books);
 		
