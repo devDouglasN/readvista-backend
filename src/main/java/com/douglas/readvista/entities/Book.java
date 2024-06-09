@@ -26,6 +26,8 @@ public class Book implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	 private String imagePath;
+	
 	private String title;
 	private String author;
 	private String yearOfPublication;
@@ -45,7 +47,7 @@ public class Book implements Serializable{
 	public Book() {
 	}
 	
-	public Book(Integer id, String title, String author, String yearOfPublication, Status status, BookCondition bookCondition) {
+	public Book(Integer id, String imagePath, String title, String author, String yearOfPublication, Status status, BookCondition bookCondition) {
 		super();
 		this.active = true;
 		this.id = id;
@@ -73,6 +75,14 @@ public class Book implements Serializable{
 	public void setLoans(List<Loan> loans) {
 		this.loans = loans;
 	}
+	
+	public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
 	public Integer getId() {
 		return id;
