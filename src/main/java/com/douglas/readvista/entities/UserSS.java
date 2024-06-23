@@ -1,40 +1,37 @@
 package com.douglas.readvista.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serial;
 import java.util.Collection;
-import java.util.List;
 
-@Entity
 public class UserSS implements UserDetails {
+	
+	@Serial
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String email;
     private String password;
+    private Collection<? extends GrantedAuthority> authorities;
 
     public UserSS() {
         super();
     }
-    public UserSS(Integer id, String email, String password) {
+    
+    public UserSS(Integer id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         super();
         this.id = id;
         this.email = email;
         this.password = password;
+        this.authorities = authorities;
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
 
     @Override
     public String getPassword() {
