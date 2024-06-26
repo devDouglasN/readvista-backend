@@ -21,7 +21,7 @@ public class CustomerAvailabilityValidator implements ValidatorForBookLoans {
 		var customerIsEnabled = repository.existsByIdAndActiveTrue(data.idCustomer());
 		
 		if(!customerIsEnabled) {
-			throw new ValidationException("Customer not found!") ;
+			throw new ValidationException("Cliente não encontrado!") ;
 		}
 	}
 	

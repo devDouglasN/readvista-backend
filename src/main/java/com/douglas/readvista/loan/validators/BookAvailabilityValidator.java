@@ -18,7 +18,7 @@ public class BookAvailabilityValidator implements ValidatorForBookLoans {
 		var idBook = repository.existsByIdAndActiveTrue(data.idBook());
 		
 		if(!idBook) {
-			throw new ValidationException("Book not available!");
+			throw new ValidationException("Livro não disponível!");
 		}
 	}
 	

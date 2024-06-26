@@ -28,7 +28,7 @@ public class LoanDurationValidator implements ValidatorForBookLoans {
         long daysBetween = ChronoUnit.DAYS.between(loanDate, proposedReturnDate);
 
         if (daysBetween > MAX_LOAN_DURATION) {
-            throw new ValidationException("Loan duration exceeds the maximum allowed!");
+            throw new ValidationException("A duração do empréstimo excede o máximo permitido!");
         }	
 	}
 	

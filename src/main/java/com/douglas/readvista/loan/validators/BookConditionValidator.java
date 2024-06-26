@@ -9,16 +9,18 @@ import com.douglas.readvista.services.exceptions.ValidationException;
 public class BookConditionValidator implements ValidatorForBookCondition {
 	
 	 public void validator(Book book) {
+		 
 	        if (book.getCondition() == null) {
-	            throw new ValidationException("Book condition is not specified!");
+	            throw new ValidationException("A condição do livro não foi especificada!");
 	        }
+	        
 	        switch (book.getCondition()) {
             case GOOD:
                 break;
             case DAMAGED:
-                throw new ValidationException("Book is damaged and cannot be loaned!");
+                throw new ValidationException("O livro está danificado e não pode ser emprestado!");
             case LOST:
-                throw new ValidationException("Book is lost and cannot be loaned!");
+                throw new ValidationException("O livro foi perdido e não pode ser emprestado!");
         }
     }
 }

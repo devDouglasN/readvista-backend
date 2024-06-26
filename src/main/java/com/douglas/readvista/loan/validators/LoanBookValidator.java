@@ -27,7 +27,7 @@ public class LoanBookValidator implements ValidatorForBookLoans {
 		var bookWasBorrowed = loanRepository.existsByBookId(data.idBook());
 		
 		if(bookIsActive && bookWasBorrowed) {
-			throw new ValidationException("The book is already on loan!");
+			throw new ValidationException("Este livro já está emprestado!");
 		}
 	}
 }

@@ -10,6 +10,7 @@ import com.douglas.readvista.services.exceptions.ValidationException;
 public class BusinessHoursValidator implements ValidatorForBookLoans {
 
 	public void validator (BookLoanData data) {
+		
 		var date = data.date();
 		var sunday = date.getDayOfWeek().equals(DayOfWeek.SUNDAY);
 		var saturday = date.getDayOfWeek().equals(DayOfWeek.SATURDAY);
@@ -17,7 +18,7 @@ public class BusinessHoursValidator implements ValidatorForBookLoans {
 		var libraryClosure = date.getHour() > 18;	
 		
 		if(sunday || saturday || libraryOpening || libraryClosure) {
-			throw new ValidationException("Library outside opening hours!");
+			throw new ValidationException("Biblioteca fora do horário de funcionamento!");
 		}
 	}
 }

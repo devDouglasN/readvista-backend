@@ -19,7 +19,7 @@ public class LoanLimitValidator implements ValidatorForBookLoans {
 		var totalLoans  = repository.countLoansByCustomerId(data.idCustomer());
 		
 		if(totalLoans >= MAX_LOANS_PER_CUSTOMER) {
-			throw new ValidationException("Loan limit reached for the customer!");
+			throw new ValidationException("Limite de empréstimo atingido para o cliente!");
 		}	
 	}
 }
