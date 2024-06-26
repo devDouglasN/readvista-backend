@@ -16,6 +16,8 @@ public record CustomerDTO(
 		String email,
 
 		@NotNull(message = "Field PASSWORD is required") 
-		String password) {
-
-}
+		String password,	
+		
+		Integer libraryId
+		
+		) {}
