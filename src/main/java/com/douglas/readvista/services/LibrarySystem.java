@@ -46,24 +46,17 @@ public class LibrarySystem implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		String email = "usuario@test.com";
-		String password = "senha";
-		String passwordEncrypted = passwordEncoder.encode(password);
-		UserSS user = new UserSS(null, email, passwordEncrypted);
-		if (!userRepository.existsByEmail(email)) {
-			userRepository.save(user);
-		}
 		
 		Address address = new Address("Jardim Paulista", "78145-184", "São Paulo", "Prédio 05", "1005");
 		Library library = new Library(null, "Labirinto Literário", address);
 		libraryRepository.save(library);
 		
-		Customer customer1 = new Customer(null, "Douglas Nascimento", "337.411.810-05", "douglas@mail.com", library, "senha");
-		Customer customer2 = new Customer(null, "Luana Souza", "234.958.770-37", "luana.souza@mail.com", library, "senha");
-		Customer customer3 = new Customer(null, "Lucas Silva", "564.065.300-04", "lucas.silva@mail.com", library, "senha");
-		Customer customer4 = new Customer(null, "Maria Oliveira", "888.151.540-78", "maria.oliveira@mail.com", library, "senha");
-		Customer customer5 = new Customer(null, "Beatriz Pereira", "691.905.580-57", "beatriz.pereira@mail.com", library, "senha");
-		Customer customer6 = new Customer(null, "Gabriel Almeida", "308.172.190-30", "gabriel.almeida@mail.com", library, "senha");
+		Customer customer1 = new Customer(null, "Douglas Nascimento", "337.411.810-05", "douglas@mail.com", library, passwordEncoder.encode("senha"));
+		Customer customer2 = new Customer(null, "Luana Souza", "234.958.770-37", "luana.souza@mail.com", library, passwordEncoder.encode("senha"));
+		Customer customer3 = new Customer(null, "Lucas Silva", "564.065.300-04", "lucas.silva@mail.com", library, passwordEncoder.encode("senha"));
+		Customer customer4 = new Customer(null, "Maria Oliveira", "888.151.540-78", "maria.oliveira@mail.com", library, passwordEncoder.encode("senha"));
+		Customer customer5 = new Customer(null, "Beatriz Pereira", "691.905.580-57", "beatriz.pereira@mail.com", library, passwordEncoder.encode("senha"));
+		Customer customer6 = new Customer(null, "Gabriel Almeida", "308.172.190-30", "gabriel.almeida@mail.com", library, passwordEncoder.encode("senha"));
 		List<Customer> customers = Arrays.asList(customer1, customer2, customer3, customer4, customer5, customer6);
 		List<Customer> saveCustomers = customerRepository.saveAll(customers);
 	
@@ -91,7 +84,6 @@ public class LibrarySystem implements CommandLineRunner {
 		
 		List<Book> books = Arrays.asList(book1, book2, book3, book4, book5, book6, book7);
 		List<Book> saveBooks = bookRepository.saveAll(books);
-		
 		
 		Loan loan1 = new Loan(null, saveBooks.get(0), saveCustomers.get(0));
 		Loan loan2 = new Loan(null, saveBooks.get(1), saveCustomers.get(1));
