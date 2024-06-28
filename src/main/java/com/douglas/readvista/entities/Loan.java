@@ -51,6 +51,12 @@ public class Loan implements Serializable{
 	    this.loanDate = loanDate;
 	    this.returnDate = returnDate;
 	}
-
+	
+	public Loan(Integer id, Book book, Customer customer) {
+		super();
+		this.id = id;
+		this.book = book;
+		this.customer = customer;
+	}
 	
 }
