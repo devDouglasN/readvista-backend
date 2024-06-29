@@ -74,7 +74,7 @@ public class CustomerService {
         }
     }
 
-    private CustomerDTO mapToDTO(Customer customer) {
+    public CustomerDTO mapToDTO(Customer customer) {
         return new CustomerDTO(
             customer.getId(), 
             customer.getName(), 

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.douglas.readvista.dtos.BookDTO;
+import com.douglas.readvista.entities.Book;
 import com.douglas.readvista.services.BookService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -24,7 +25,9 @@ public class BookResource {
     
     @GetMapping("/{id}")
     public ResponseEntity<BookDTO> findById(@PathVariable Integer id){
-        return ResponseEntity.ok(service.findById(id));
+        Book book = service.findBookById(id);
+        BookDTO bookDTO = service.mapToDTO(book); 
+        return ResponseEntity.ok(bookDTO);
     }
     
     @GetMapping

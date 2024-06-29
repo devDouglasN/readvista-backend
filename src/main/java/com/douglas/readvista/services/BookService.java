@@ -55,7 +55,7 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
-    private BookDTO mapToDTO(Book book) {
+    public BookDTO mapToDTO(Book book) {
         return new BookDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getYearOfPublication(), book.getStatus(), book.getBookCondition());
     }
 }

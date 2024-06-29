@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.douglas.readvista.dtos.CustomerDTO;
+import com.douglas.readvista.entities.Customer;
 import com.douglas.readvista.services.CustomerService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -24,7 +25,9 @@ public class CustomerResource {
 
     @GetMapping("/{id}")
     public ResponseEntity<CustomerDTO> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok(service.findById(id));
+        Customer customer = service.findCustomerById(id);
+        CustomerDTO customerDTO = service.mapToDTO(customer); // 
+        return ResponseEntity.ok(customerDTO);
     }
 
     @GetMapping
